@@ -10,7 +10,7 @@ tag supports `ag` and `ripgrep (rg)`. There are no plans to support ack or grep.
 
 tag makes it easy to _immediately_ jump to a search match in your favorite editor. It eliminates the tedious task of typing `vim foo/bar/baz.qux +42` to jump to a match by automatically generating these commands for you as shell aliases.
 
-Inside vim, [vim-grepper](https://github.com/mhinz/vim-grepper) or [ag.vim](https://github.com/rking/ag.vim) is probably the way to go. Outside vim (or inside a Neovim `:terminal`), tag is your best friend.
+Inside vim, [fzf.vim](https://github.com/junegunn/fzf.vim) is probably the way to go. Outside vim (or inside a Neovim `:terminal`), tag is your best friend.
 
 Finally, tag is unobtrusive. It should behave exactly like `ag` or `ripgrep` under most circumstances.
 
@@ -28,15 +28,23 @@ $ time ( for _ in {1..10}; do tag EXPORT_SYMBOL_GPL >/dev/null 2>&1; done )
 
 # Installation
 
+**NOTE: These instructions are for installing my personal fork of tag that increases the max buffer size to 64 MiB. [Click here](https://github.com/aykamko/tag) for the upstream project.**
+
 1. Update to the latest versions of [`ag`](https://github.com/ggreer/the_silver_searcher) or [`ripgrep`](https://github.com/BurntSushi/ripgrep). `ag` in particular must be version `>= 0.25.0`.
 
 1. Install the `tag` binary using one of the following methods.
     - Homebrew (OSX)
       ```
-      $ brew tap aykamko/tag-ag
-      $ brew install tag-ag
+      $ brew tap JohnMaguire/tag
+      $ brew install tag
       ```
 
+    - Developers and other platforms
+      ```
+      $ go install github.com/JohnMaguire/tag@latest
+      ```
+
+<!-- These instructions need updating.
     - AUR (Arch Linux)
 
       Using your favorite [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers), install the [tag-ag AUR package](https://aur.archlinux.org/packages/tag-ag/) like this:
@@ -45,12 +53,7 @@ $ time ( for _ in {1..10}; do tag EXPORT_SYMBOL_GPL >/dev/null 2>&1; done )
       ```
 
     - [Download a compressed binary for your platform](https://github.com/aykamko/tag/releases)
-
-    - Developers and other platforms
-      ```
-      $ go get -u github.com/aykamko/tag/...
-      $ go install github.com/aykamko/tag
-      ```
+-->
 
 1. By default, `tag` uses `ag` as its search backend. To use `ripgrep` instead, set the environment variable `TAG_SEARCH_PROG=rg`. (To persist this setting, put it in your `bashrc`/`zshrc`.)
 
